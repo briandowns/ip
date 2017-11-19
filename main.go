@@ -1,4 +1,4 @@
-package main
+package ip
 
 import (
 	"encoding/json"
@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-func main() {
+func IP() {
 	res, err := http.Get("http://httpbin.org/ip")
 	if err != nil {
 		fmt.Println(err)
