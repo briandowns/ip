@@ -2,21 +2,19 @@ package ip
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 )
 
-func IP() {
+// IP gets the calling IP address from httpbin.org
+func IP() (string, error) {
 	res, err := http.Get("http://httpbin.org/ip")
 	if err != nil {
-		fmt.Println(err)
-		return
+		return "", err
 	}
 	defer res.Body.Close()
 	var data map[string]string
 	if err := json.NewDecoder(res.Body).Decode(&data); err != nil {
-		fmt.Println(err)
-		return
+		return "", err
 	}
-	fmt.Println(data["origin"])
+	return data["origin"], nil
 }
